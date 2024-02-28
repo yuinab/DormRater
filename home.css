@@ -1,0 +1,66 @@
+/*
+UVA Blue: #232d4b
+UVA Orange: #E57200
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Merriweather:wght@400&display=swap');
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: #232D4B;
+    font-family: 'Lato', sans-serif;
+}
+
+.nav-text {
+    color: white;
+}
+
+
+.main-title {
+    text-align: center;
+}
+
+.welcome-blurb {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #6c757d;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#dormAccordion h2 .btn {
+    font-size: inherit;
+    color: inherit;
+    padding: 0;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+#dormAccordion .btn-link {
+    display: block;
+}
+
+#dormAccordion .dorm-card {
+    border: 1px solid #232d4b;
+    border-width: 0.25rem;
+    margin-bottom: 0.75rem;
+    background-color: #e57200;
+}
+
+.dorm-card a {
+    font-family: 'Lato', sans-serif;
+    display: block;
+    color: #232d4b;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+.dorm-card a:hover {
+    color: #e57200;
+    text-decoration: none;
+}
+
