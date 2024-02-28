@@ -4,14 +4,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Dorm Review</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Welcome to Our Project</h1>
-    <p>This is the home page of our project. More content will be added here as the project progresses.</p>
+    <header>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand">Dorm Rater</a>
+                <form class="d-flex" role="search">
+                    <a href="login.html" class="btn btn-outline-success">Log In</a>
+                    <a href="signup.html" class="btn btn-outline-success">Sign Up</a>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-4 mt-5">
+        <h1 class="main-title">
+            Dorm Rater
+        </h1>
+
+        <div class="search-bar mt-5 mb-5">
+            <input class="form-control" type="search" placeholder="Search for a dorm" aria-label="Search">
+        </div>
+
+        <h2>Alderman Road Hall-Style</h2>
+
+        <div id="dormAccordion" class="accordion">
+
+            <div class="card mt-5">
+                <div class="card-header" id="headingBalz-Dobie">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseBalz-Dobie" aria-expanded="false"
+                                    aria-controls="collapseBalz-Dobie">
+                                    Balz-Dobie
+                                </button>
+                            </h5>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="" alt="Balz-Dobie Dorm" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="collapseBalz-Dobie" class="collapse" aria-labelledby="headingBalz-Dobie"
+                    data-parent="#dormAccordion">
+                    <div class="card-body">
+                        <a href="writereview.html" class="btn btn-primary">Leave a review</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card mt-4">
+                <div class="card-header" id="headingCauthen">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseCauthen" aria-expanded="false"
+                                    aria-controls="collapseCauthen">
+                                    Cauthen
+                                </button>
+                            </h5>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="" alt="Cauthen Dorm" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="collapseCauthen" class="collapse" aria-labelledby="headingCauthen"
+                    data-parent="#dormAccordion">
+                    <div class="card-body">
+                        <a href="writereview.html" class="btn btn-primary">Leave a review</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Alderman Road Suite-Style</h2>
+
+        <h2>McCormick Road</h2>
+
+        <h2>Gooch / Dillard Suie-Stlye</h2>
+
+        <h2>Resedential Colleges</h2>
+
+
+    </main>
+    <!-- Include Bootstrap JS and its dependencies before the closing body tag -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>
-
-<!--This is a change-->
