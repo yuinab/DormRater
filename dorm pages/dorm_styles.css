@@ -1,8 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Merriweather:wght@400&display=swap');
+
+
+h1, h2, h3, h4, h5, h6, p {
+    color: #232D4B;
+    font-family: 'Lato', sans-serif;
+}
+.nav-text {
+    color: white !important;
+}
+.nav-btn {
+    font-family: 'Lato', sans-serif;
+    color: #232d4b;
+}
+
+.no-reviews{
+    text-align: center;
+    color:#8e96ad;
+}
 .main-title {
     text-align: center;
 }
 .card-title{
-    align-items: center;
+    text-align: center;
 }
 
 .review-ratings {
