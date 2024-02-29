@@ -1,0 +1,13 @@
+.main-title {
+    text-align: center;
+}
+.card-title{
+    align-items: center;
+}
+
+.review-ratings {
+    font-size: 16px; 
+    display: flex;
+    justify-content: flex-end;
+
+}
