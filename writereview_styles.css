@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Merriweather:wght@400&display=swap');
+
+.star-rating-label {
+    display: flex;
+    justify-content: center;
+    font-size: 1.25rem;
+    width: 100%;
+}
+
+.star-rating {
+    display: flex;
+    justify-content: center;
+}
+
+.star-rating .bi {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.star-rating .bi-star-fill {
+    color: #ffc107;
+}
+
+.submit-btn {
+    font-family: 'Lato', sans-serif;
+    color: #232d4b;
+    
+}
