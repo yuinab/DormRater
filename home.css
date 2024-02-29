@@ -14,6 +14,10 @@ h1, h2, h3, h4, h5, h6 {
 .nav-text {
     color: white;
 }
+.nav-btn {
+    font-family: 'Lato', sans-serif;
+    color: #232d4b;
+}
 
 
 .main-title {
@@ -47,6 +51,9 @@ h1, h2, h3, h4, h5, h6 {
     border-width: 0.25rem;
     margin-bottom: 0.75rem;
     background-color: #e57200;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .dorm-card a {
@@ -60,7 +67,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dorm-card a:hover {
-    color: #e57200;
+    color: white;
     text-decoration: none;
 }
 
