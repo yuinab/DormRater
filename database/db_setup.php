@@ -2,6 +2,11 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 // Database connection credentials
+// To view tables in terminal using command line:
+// docker ps to see containters
+// docker exec -it db bash
+// psql -U localuser example
+// then use SQL commands like SELECT*FROM tablename to see whats going on
 $host = "db";
 $port = "5432";
 $database = "example";
