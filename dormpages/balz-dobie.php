@@ -12,27 +12,32 @@
   </head>
 
 <body>
-<header>
-    <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
+<?php session_start(); ?>
+    <header>
+        <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center"> 
-                <a class="navbar-brand nav-text" href="index.html" >UVA Dorm Rater</a>
+                <a class="navbar-brand nav-text" href="../index.php" >UVA Dorm Rater</a>
                 <div class="search-bar" style="width: 700px;">
                     <input class="form-control" type="search" placeholder="Search for a dorm" aria-label="Search">
                 </div>
             </div>
-
             <form class="d-flex" role="search">
-                <a href="../myreviews.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">My Reviews</a>
-                <a href="../login.html" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">Log In</a>
-                <a href="../signup.html" class="btn nav-btn" style="background-color: #e57200">Sign Up</a>
-            </form>
+                    <?php if(isset($_SESSION['username'])): ?>
+                        <span class="btn nav-btn" style="margin-right: 12px; color: #e57200;">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                        <a href="user/logout.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Log Out</a>
+                    <?php else: ?>
+                        <a href="user/login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">Log In</a>
+                        <a href="user/signup.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Sign Up</a>
+                    <?php endif; ?>
+                    <a href="user/check_login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">My Reviews</a>
+                </form>
         </div>
     </nav>
-</header>
+    </header>
     <main class="container mt-4 mt-5">
         <h1 class="main-title">
-            Cauthen
+            Balz-Dobie
         </h1>
 
         <div class="row row-cols-1 row-cols-md-2 g-2 mt-5">
@@ -41,9 +46,9 @@
                 <div class="card-body">
                   <h5 class="card-title">
                     <i class="bi-star-fill"></i>
-                    3.33
+                    —
                   </h5>
-                  <p class="card-text">1 Rating</p>
+                  <p class="card-text">0 Ratings</p>
                 </div>
               </div>
             </div>
@@ -53,17 +58,18 @@
                   <p class="card-text mx-3">
                     <i class="bi-pin-map"></i>
                     Location 
-                    <b>5</b>
+                    <b>—</b>
                   </p>
                   <p class="card-text mx-3">
                     <i class="bi-lungs"></i>
                     Conditions 
-                    <b>2</b>
+                    <b>—</b>
                   </p>
                   <p class="card-text mx-3">
                     <i class="bi-house-gear"></i>
                     Utilities 
-                    <b>3</b></p>
+                    <b>—</b>
+                  </p>
                 </div>
               </div>
             </div>
@@ -75,30 +81,7 @@
 
             <div class="card mt-3" style="width: 100rem;">
               <div class="card-body">
-                  <div class="d-flex align-items-center">
-                      <h5 class="card-title mb-0">
-                          2023-2024
-                      </h5>
-                      <span class="ml-auto review-ratings">
-                          <i class="bi-star-fill"></i>
-                          <p style="margin-right: 20px; margin-left: 2px;">3.33</p>
-                          <i class="bi-pin-map"></i>
-                          <p style="margin-right: 20px; margin-left: 2px;">5</p>
-                          <i class="bi-lungs"></i>
-                          <p style="margin-right: 20px; margin-left: 2px;">2</p>
-                          <i class="bi-house-gear"></i>
-                          <p>3</p>
-                      </span>
-                  </div>
-                  <p class="card-text">Dirty and it gave me black mold poisoning.</p>
-                  <button type="button" class="btn" data-bs-toggle="button">
-                    <i class="bi bi-hand-thumbs-up"></i>
-                    <span class="count">0</span>
-                </button>
-                <button type="button" class="btn" data-bs-toggle="button">
-                    <i class="bi bi-hand-thumbs-down"></i>
-                    <span class="count">0</span>
-                </button>
+                  <h4 class="no-reviews">No Reviews Yet</h4>
               </div>
           </div>
 </body>

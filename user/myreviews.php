@@ -12,20 +12,31 @@
   </head>
 
 <body>
+<?php session_start(); ?>
 <header>
     <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
         <div class="container-fluid d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center"> 
-                <a class="navbar-brand nav-text" href="index.html" >UVA Dorm Rater</a>
+            <div class="d-flex align-items-center">
+                <a class="navbar-brand nav-text" href="../index.php">UVA Dorm Rater</a>
                 <div class="search-bar" style="width: 700px;">
                     <input class="form-control" type="search" placeholder="Search for a dorm" aria-label="Search">
                 </div>
             </div>
-
             <form class="d-flex" role="search">
-                <a href="myreviews.html" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">My Reviews</a>
-                <a href="login.html" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">Log In</a>
-                <a href="signup.html" class="btn nav-btn" style="background-color: #e57200">Sign Up</a>
+                <?php if(isset($_SESSION['username'])): ?>
+                <span class="btn nav-btn" style="margin-right: 12px; color: #e57200;">Hello,
+                    <?php echo htmlspecialchars($_SESSION['username']); ?>
+                </span>
+                <a href="user/logout.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Log
+                    Out</a>
+                <?php else: ?>
+                <a href="user/login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">Log
+                    In</a>
+                <a href="user/signup.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Sign
+                    Up</a>
+                <?php endif; ?>
+                <a href="user/check_login.php" class="btn nav-btn"
+                    style="background-color: #e57200; margin-right: 12px;">My Reviews</a>
             </form>
         </div>
     </nav>

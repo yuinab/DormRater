@@ -15,7 +15,7 @@
         <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center"> 
-                <a class="navbar-brand nav-text" href="index.html" >UVA Dorm Rater</a>
+                <a class="navbar-brand nav-text" href="index.php" >UVA Dorm Rater</a>
                 <div class="search-bar" style="width: 700px;">
                     <input class="form-control" type="search" placeholder="Search for a dorm" aria-label="Search">
                 </div>

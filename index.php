@@ -53,13 +53,13 @@
             
                 <div id="aldermanRoadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="dormpages/balz-dobie.html">Balz-Dobie</a>
+                        <a href="dormpages/balz-dobie.php">Balz-Dobie</a>
                     </div>
                 </div>
 
                 <div id="aldermanRoadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="dormpages/cauthen.html">Cauthen</a>
+                        <a href="dormpages/cauthen.php">Cauthen</a>
                     </div>
                 </div>
 

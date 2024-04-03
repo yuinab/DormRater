@@ -6,7 +6,7 @@ session_start();
 
 // Check if the user is logged in, otherwise redirect to the login page
 if (!isset($_SESSION['user_id'])) {
-    header('Location: user/login.php'); // Adjusted to assume login.php is in the same directory level as submit_review.php
+    header('Location: user/login.php');
     exit;
 }
 
