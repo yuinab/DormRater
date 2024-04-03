@@ -38,11 +38,12 @@ $createReviewsTable = "CREATE TABLE reviews (
     review_id INTEGER PRIMARY KEY DEFAULT nextval('reviews_id_seq'),
     user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
     dorm_name VARCHAR(100) NOT NULL,
-    rating INTEGER CHECK (rating >= 1 AND rating <= 5),
+    location_rating INTEGER CHECK (location_rating >= 1 AND location_rating <= 5),
+    conditions_rating INTEGER CHECK (conditions_rating >= 1 AND conditions_rating <= 5),
+    utilities_rating INTEGER CHECK (utilities_rating >= 1 AND utilities_rating <= 5),
     review_text TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );";
-
 
 pg_query($dbHandle, $createUsersTable) or die('Error with createUsersTable query: ' . pg_last_error());
 pg_query($dbHandle, $createReviewsTable) or die('Error with createReviewsTable query: ' . pg_last_error());
