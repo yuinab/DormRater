@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Drew Hollar">
-    <title>Log In</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-    </header>
-    <main>
-        <p>Log In</p>
-        <?php
+<?php
         session_start(); // Start a new session or resume the existing one
 
         // Check if form was submitted
@@ -52,6 +38,21 @@
             }
         }
         ?>
+        
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Drew Hollar">
+    <title>Log In</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+    </header>
+    <main>
+        <p>Log In</p>
 
         <form action="login.php" method="post">
             <label for="username">Username:</label>

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,6 @@
 </head>
 
 <body>
-    <?php session_start(); ?>
     <header>
         <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
             <div class="container-fluid">
