@@ -1,30 +1,30 @@
 <?php
 session_start();
-// Check if there is already text in here. for when editing reviews
-if(isset($_SESSION['review_text'])) {
-    $existingReviewText = htmlspecialchars($_SESSION['review_text']);
-} else {
-    $existingReviewText = '';
-}
+require_once 'database/db_connect.php'; 
+// Get the review_id from the URL parameters
+$review_id = isset($_GET['review_id']) ? $_GET['review_id'] : null;
 
-// Get ratings from session if they exist
-$utilitiesRating = isset($_SESSION['utilities_rating']) ? $_SESSION['utilities_rating'] : 0;
-$locationRating = isset($_SESSION['location_rating']) ? $_SESSION['location_rating'] : 0;
-$conditionsRating = isset($_SESSION['conditions_rating']) ? $_SESSION['conditions_rating'] : 0;
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $newReviewText = $_POST['reviewText'];
+if ($review_id) {
+    $query = "SELECT * FROM reviews WHERE review_id = $1";
+    $result = pg_prepare($dbHandle, "fetch_review", $query);
     
-    require_once 'your_database_connection.php';
-
-    $updateQuery = "UPDATE reviews SET review_text = $1 WHERE dorm_name = $2";
-    $result = pg_prepare($dbHandle, "update_review", $updateQuery);
-    $result = pg_execute($dbHandle, "update_review", array($newReviewText, $_SESSION['dorm_name']));
-    if ($result) {
-        unset($_SESSION['review_text']);
-    } else {
-        echo "Failed to update review in the database.";
-    }
+    $result = pg_execute($dbHandle, "fetch_review", array($review_id));
+    
+    if ($result && pg_num_rows($result) > 0) {
+        $review = pg_fetch_assoc($result);
+        
+        $_SESSION['dorm_name'] = $review['dorm_name'];
+        $reviewText= $review['review_text'];
+        $utilitiesRating = $review['utilities_rating'];
+        $locationRating = $review['location_rating'];
+        $conditionsRating = $review['conditions_rating'];
+    } 
+}
+else {
+    $reviewText="";
+    $utilitiesRating = 0;
+    $locationRating = 0;
+    $conditionsRating = 0;
 }
 ?>
 
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <i class="bi bi-star<?php echo ($i <= $locationRating) ? '-fill' : ''; ?>" data-rating="<?php echo $i; ?>"></i>
                     <?php endfor; ?>
                 </div>
-                <input type="hidden" name="location_rating" value="<?php echo $locationRating; ?>">
+                <input type="hidden" name="location_rating" value="<?php echo $review['location_rating']; ?>">
             </div>
             
             <!-- Conditions Rating -->
@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <!-- Review Text -->
             <div class="form-group mb-4">
                 <label for="reviewText">Write your review</label>
-                <textarea class="form-control" id="reviewText" name="reviewText" rows="5"><?php echo $existingReviewText; ?></textarea>
+                <textarea class="form-control" id="reviewText" name="reviewText" rows="5"><?php echo $reviewText; ?></textarea>
             </div>
             
             <button type="submit" class="btn submit-btn" style="background-color: #e57200">Submit</button>

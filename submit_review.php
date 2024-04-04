@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 
 session_start();
 
+// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: user/login.php');
     exit;
@@ -11,6 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'database/db_connect.php';
 
+// Check if form data is sent via POST method and session contains user ID
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $_SESSION['user_id'];
     $dorm_name = $_SESSION['dorm_name'];
@@ -38,19 +40,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $update_avg_query = "UPDATE dorms SET 
             avg_location_rating = (SELECT AVG(location_rating) FROM reviews WHERE dorm_name = $1),
             avg_conditions_rating = (SELECT AVG(conditions_rating) FROM reviews WHERE dorm_name = $1),
-            avg_utilities_rating = (SELECT AVG(utilities_rating) FROM reviews WHERE dorm_name = $1),
-            avg_rating = ((SELECT AVG(location_rating) FROM reviews WHERE dorm_name = $1) + (SELECT AVG(conditions_rating) FROM reviews WHERE dorm_name = $1) + (SELECT AVG(utilities_rating) FROM reviews WHERE dorm_name = $1)) / 3
+            avg_utilities_rating = (SELECT AVG(utilities_rating) FROM reviews WHERE dorm_name = $1)
             WHERE dorm_name = $1";
         $result_avg = pg_prepare($dbHandle, "update_avg_ratings", $update_avg_query);
         $result_avg = pg_execute($dbHandle, "update_avg_ratings", array($dorm_name));
 
         if (!$result_avg) {
             echo "Error updating average ratings: " . pg_last_error($dbHandle);
+            
         }
 
         header("Location: user/myreviews.php");
     } else {
         echo "An error occurred: " . pg_last_error($dbHandle);
+        
     }
 } else {
     header('Location: writereview.php');

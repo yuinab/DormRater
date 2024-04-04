@@ -35,4 +35,3 @@ if (pg_num_rows($result) > 0) {
 
 // Encode the response array to JSON format
 echo json_encode($response);
-?>
