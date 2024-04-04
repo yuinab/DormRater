@@ -39,4 +39,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
     // Redirect to the form if this script is accessed via a GET request
     header('Location: writereview.php');
+}
 ?>

@@ -1,3 +1,39 @@
+<?php
+    session_start();
+    require_once '../database/db_connect.php';
+
+    // calculating averages
+    $total_ratings = 0;
+    $total_location = 0;
+    $total_conditions = 0;
+    $total_utilities = 0;
+    $review_count = 0;
+
+    // reviews for Cauthen from the database
+    $dorm_name = 'Cauthen'; // name of the dorm for which to fetch review, change on each site
+    $query = "SELECT * FROM reviews WHERE dorm_name = $1 ORDER BY created_at DESC";
+    $result = pg_prepare($dbHandle, "fetch_reviews", $query);
+    $result = pg_execute($dbHandle, "fetch_reviews", array($dorm_name));
+
+    // averages if there are reviews
+    if ($result && pg_num_rows($result) > 0) {
+        while ($review = pg_fetch_assoc($result)) {
+            $total_location += (int)$review['location_rating'];
+            $total_conditions += (int)$review['conditions_rating'];
+            $total_utilities += (int)$review['utilities_rating'];
+            $review_count++;
+        }
+
+        // Reset the pointer to the first result
+        pg_result_seek($result, 0);
+
+        $average_location = $total_location / $review_count;
+        $average_conditions = $total_conditions / $review_count;
+        $average_utilities = $total_utilities / $review_count;
+        $average_rating = ($average_location + $average_conditions + $average_utilities) / 3;
+    }
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +48,6 @@
   </head>
 
 <body>
-<?php session_start(); ?>
     <header>
         <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
         <div class="container-fluid d-flex justify-content-between align-items-center">
@@ -35,75 +70,86 @@
         </div>
     </nav>
     </header>
-    <main class="container mt-4 mt-5">
-        <h1 class="main-title">
-            Cauthen
-        </h1>
+    <main class="container mt-4 mt-5 text-center">
+    <h1 class="main-title">
+        Cauthen
+    </h1>
 
-        <div class="row row-cols-1 row-cols-md-2 g-2 mt-5">
-            <div class="col offset-md-3 pb-3">
-                <div class="card text-center mb-3 h-100" style="max-width: 15rem;">
+    <?php if ($review_count > 0): ?>
+    <div class="row row-cols-1 row-cols-md-2 g-2 mt-5">
+        <div class="col offset-md-3 pb-3">
+            <div class="card text-center mb-3 h-100" style="max-width: 15rem;">
                 <div class="card-body">
-                  <h5 class="card-title">
-                    <i class="bi-star-fill"></i>
-                    3.33
-                  </h5>
-                  <p class="card-text">1 Rating</p>
+                    <h5 class="card-title">
+                        <i class="bi-star-fill"></i>
+                        <?php echo round($average_rating, 2); ?>
+                    </h5>
+                    <p class="card-text"><?php echo $review_count; ?> Review<?php echo $review_count > 1 ? 's' : ''; ?></p>
                 </div>
-              </div>
             </div>
-            <div class="col-md-6 pb-3">
-                <div class="card text-center mb-3 h-100" style="max-width: 15rem;">
+        </div>
+        <div class="col-md-6 pb-3">
+            <div class="card text-center mb-3 h-100" style="max-width: 15rem;">
                 <div class="card-body">
-                  <p class="card-text mx-3">
-                    <i class="bi-pin-map"></i>
-                    Location 
-                    <b>5</b>
-                  </p>
-                  <p class="card-text mx-3">
-                    <i class="bi-lungs"></i>
-                    Conditions 
-                    <b>2</b>
-                  </p>
-                  <p class="card-text mx-3">
-                    <i class="bi-house-gear"></i>
-                    Utilities 
-                    <b>3</b></p>
+                    <p class="card-text mx-3">
+                        <i class="bi-pin-map"></i>
+                        Location 
+                        <b><?php echo round($average_location, 2); ?></b>
+                    </p>
+                    <p class="card-text mx-3">
+                        <i class="bi-lungs"></i>
+                        Conditions 
+                        <b><?php echo round($average_conditions, 2); ?></b>
+                    </p>
+                    <p class="card-text mx-3">
+                        <i class="bi-house-gear"></i>
+                        Utilities 
+                        <b><?php echo round($average_utilities, 2); ?></b>
+                    </p>
                 </div>
-              </div>
             </div>
-            
-            <div class="col-12">
-                <h2 class="d-inline-block mr-3">Reviews</h2>
-                <a href="../writereview.php" class="btn nav-btn" style="background-color: #e57200">Add your review!</a>
-            </div>
+        </div>
+    </div>
+    <?php endif; ?>
 
-            <div class="card mt-3" style="width: 100rem;">
-              <div class="card-body">
-                  <div class="d-flex align-items-center">
-                      <h5 class="card-title mb-0">
-                          2023-2024
-                      </h5>
-                      <span class="ml-auto review-ratings">
-                          <i class="bi-star-fill"></i>
-                          <p style="margin-right: 20px; margin-left: 2px;">3.33</p>
-                          <i class="bi-pin-map"></i>
-                          <p style="margin-right: 20px; margin-left: 2px;">5</p>
-                          <i class="bi-lungs"></i>
-                          <p style="margin-right: 20px; margin-left: 2px;">2</p>
-                          <i class="bi-house-gear"></i>
-                          <p>3</p>
-                      </span>
-                  </div>
-                  <p class="card-text">Dirty and it gave me black mold poisoning.</p>
-                  <button type="button" class="btn" data-bs-toggle="button">
-                    <i class="bi bi-hand-thumbs-up"></i>
-                    <span class="count">0</span>
-                </button>
-                <button type="button" class="btn" data-bs-toggle="button">
-                    <i class="bi bi-hand-thumbs-down"></i>
-                    <span class="count">0</span>
-                </button>
-              </div>
-          </div>
+    <div class="col-12 mt-4">
+        <h2 class="d-inline-block mr-3">Reviews</h2>
+        <a href="../writereview.php" class="btn nav-btn" style="background-color: #e57200">Add your review!</a>
+    </div>
+
+    <?php
+    if ($result && $review_count > 0) {
+        while ($review = pg_fetch_assoc($result)) {
+            $review_date = new DateTime($review['created_at']);
+            $review_date_formatted = $review_date->format('F j, Y');
+            echo "<div class='card mt-3' style='max-width: 100%;'>";
+            echo "<div class='card-body'>";
+            echo "<div class='d-flex align-items-center'>";
+            echo "<h5 class='card-title mb-0'>{$review_date_formatted}</h5>"; // Formatted date
+            echo "<span class='ml-auto review-ratings'>";
+            echo "<i class='bi-star-fill'></i>";
+            echo "<p style='margin-right: 20px; margin-left: 2px;'>". round(($review['location_rating'] + $review['conditions_rating'] + $review['utilities_rating']) / 3, 2) ."</p>";
+            echo "<i class='bi-pin-map'></i>";
+            echo "<p style='margin-right: 20px; margin-left: 2px;'>{$review['location_rating']}</p>";
+            echo "<i class='bi-lungs'></i>";
+            echo "<p style='margin-right: 20px; margin-left: 2px;'>{$review['conditions_rating']}</p>";
+            echo "<i class='bi-house-gear'></i>";
+            echo "<p>{$review['utilities_rating']}</p>";
+            echo "</span>";
+            echo "</div>";
+            echo "<p class='card-text'>".htmlspecialchars($review['review_text'])."</p>";
+            // Add buttons for likes and dislikes if you have that functionality
+            echo "</div>";
+            echo "</div>";
+        }
+      } else {
+    echo "<div class='card mt-3' style='width: 100%;'>"; // Changed 100rem to 100% to fit the container
+    echo "<div class='card-body'>";
+    echo "<h4 class='no-reviews'>No Reviews Yet</h4>";
+    echo "</div>";
+    echo "</div>";
+}
+    ?>
+</main>
+
 </body>
