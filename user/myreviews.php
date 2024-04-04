@@ -1,4 +1,18 @@
-<?php session_start(); ?>
+<?php session_start(); 
+require_once '../database/db_connect.php';
+// Check if the user is logged in
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+$query = "SELECT * FROM reviews WHERE user_id = $1 ORDER BY created_at DESC";
+$result = pg_prepare($dbHandle, "fetch_reviews", $query);
+$result = pg_execute($dbHandle, "fetch_reviews", array($user_id));
+
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yuina Barzdukas">
     <title>Cauthen Reviews</title>
-    <link rel="stylesheet" href="../home.css">
+    <link rel="stylesheet" href="../dormpages/dorm_styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -25,12 +39,12 @@
             <form class="d-flex" role="search">
                     <?php if(isset($_SESSION['username'])): ?>
                         <span class="btn nav-btn" style="margin-right: 12px; color: #e57200;">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                        <a href="user/logout.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Log Out</a>
+                        <a href="logout.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Log Out</a>
                     <?php else: ?>
-                        <a href="user/login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">Log In</a>
-                        <a href="user/signup.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Sign Up</a>
+                        <a href="login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">Log In</a>
+                        <a href="signup.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Sign Up</a>
                     <?php endif; ?>
-                    <a href="user/check_login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">My Reviews</a>
+                    <a href="check_login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">My Reviews</a>
                 </form>
         </div>
     </nav>
@@ -40,46 +54,64 @@
             My Reviews
         </h1>
 
-        <div class="row row-cols-1 row-cols-md-2 g-2 mt-5">
-            <button type="button"  class="btn" data-bs-toggle="button">
-                <i class="bi-trash"></i>
-            </button>
-            <a class="btn" href="../writereview.php" role="button"><i class="bi-pencil-square"></i></a>
-            <div class="card mt-3" style="width: 100rem;">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h5 class="card-title mb-0">
-                                Cauthen 2023-2024
-                            </h5>
-                        </div>
-                        <div class="col-auto d-flex align-items-center">
-                            <i class="bi-star-fill"></i>
-                            <p style="margin-right: 20px; margin-left: 2px;">3.33</p>
-                            <i class="bi-pin-map"></i>
-                            <p style="margin-right: 20px; margin-left: 2px;">5</p>
-                            <i class="bi-lungs"></i>
-                            <p style="margin-right: 20px; margin-left: 2px;">2</p>
-                            <i class="bi-house-gear"></i>
-                            <p>3</p>
-                        </div>
-                    </div>
-                    <div class="mt-3"> <!-- Added div for separating text from icons -->
-                        <p class="card-text">Dirty and it gave me black mold poisoning.</p>
-                    </div>
-                    <div class="d-flex mt-3"> <!-- Added div and class for button alignment -->
-                        <button type="button" class="btn" data-bs-toggle="button">
-                            <i class="bi-hand-thumbs-up"></i>
-                            <span class="count">0</span>
-                        </button>
-                        <button type="button" class="btn" data-bs-toggle="button">
-                            <i class="bi-hand-thumbs-down"></i>
-                            <span class="count">0</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php
+if (pg_num_rows($result) > 0) {
+    while ($review = pg_fetch_assoc($result)) {
+
+        $_SESSION['dorm_name'] = $review['dorm_name'];
+        $_SESSION['review_text'] = $review['review_text'];
+        $_SESSION['location_rating'] = $review['location_rating'];
+        $_SESSION['conditions_rating'] = $review['conditions_rating'];
+        $_SESSION['utilities_rating'] = $review['utilities_rating'];
+
+        $review_dorm= $review['dorm_name'];
+        $review_date = new DateTime($review['created_at']);
+        $review_date_formatted = $review_date->format('F j, Y');
+        $review_id = $review['review_id'];
+        echo "<div class='card mt-3' style='max-width: 100%;'>";
+        echo "<div class='card-body'>";
+        
+        // Buttons for deleting and editing reviews
+        echo "<div class='d-flex align-items-center mb-3'>";
+        echo "<form action='delete_review.php' method='post'>";
+        echo "<input type='hidden' name='review_id' value='{$review['review_id']}'>"; // Assuming 'id' is the primary key of your reviews table
+        echo "<button type='submit' class='btn' name='delete_review'>";
+        echo "<i class='bi-trash'></i>";
+        echo "</button>";
+        echo "</form>";
+        echo "<a class='btn' href='../writereview.php' role='button'><i class='bi-pencil-square'></i></a>";
+        echo "</div>";
+
+        // Review details
+        echo "<div class='d-flex align-items-center'>";
+        echo "<h5 class='card-title mb-0'>{$review_dorm} - {$review_date_formatted} </h5>";
+        echo "<span class='ml-auto review-ratings'>";
+        echo "<i class='bi-star-fill'></i>";
+        echo "<p style='margin-right: 20px; margin-left: 2px;'>" . round(($review['location_rating'] + $review['conditions_rating'] + $review['utilities_rating']) / 3, 2) . "</p>";
+        echo "<i class='bi-pin-map'></i>";
+        echo "<p style='margin-right: 20px; margin-left: 2px;'>{$review['location_rating']}</p>";
+        echo "<i class='bi-lungs'></i>";
+        echo "<p style='margin-right: 20px; margin-left: 2px;'>{$review['conditions_rating']}</p>";
+        echo "<i class='bi-house-gear'></i>";
+        echo "<p>{$review['utilities_rating']}</p>";
+        echo "</span>";
+        echo "</div>";
+
+        // Review text
+        echo "<p class='card-text'>" . htmlspecialchars($review['review_text']) . "</p>";
+        
+        echo "</div>"; // End card-body
+        echo "</div>"; // End card
+    }
+} else {
+    echo "<div class='card mt-3' style='width: 100%;'>"; // Changed 100rem to 100% to fit the container
+    echo "<div class='card-body'>";
+    echo "<h4 class='no-reviews'>No Reviews Yet</h4>";
+    echo "</div>";
+    echo "</div>";
+}
+?>
+
     </main>
 </body>
 

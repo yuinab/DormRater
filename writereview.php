@@ -1,4 +1,32 @@
-<?php session_start(); ?>
+<?php
+session_start();
+// Check if there is already text in here. for when editing reviews
+if(isset($_SESSION['review_text'])) {
+    $existingReviewText = htmlspecialchars($_SESSION['review_text']);
+} else {
+    $existingReviewText = '';
+}
+
+// Get ratings from session if they exist
+$utilitiesRating = isset($_SESSION['utilities_rating']) ? $_SESSION['utilities_rating'] : 0;
+$locationRating = isset($_SESSION['location_rating']) ? $_SESSION['location_rating'] : 0;
+$conditionsRating = isset($_SESSION['conditions_rating']) ? $_SESSION['conditions_rating'] : 0;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $newReviewText = $_POST['reviewText'];
+    
+    require_once 'your_database_connection.php';
+
+    $updateQuery = "UPDATE reviews SET review_text = $1 WHERE dorm_name = $2";
+    $result = pg_prepare($dbHandle, "update_review", $updateQuery);
+    $result = pg_execute($dbHandle, "update_review", array($newReviewText, $_SESSION['dorm_name']));
+    if ($result) {
+        unset($_SESSION['review_text']);
+    } else {
+        echo "Failed to update review in the database.";
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,52 +64,45 @@
     </nav>
     </header>
     <main class="container mt-5">
-        <h1 class="text-center mb-4">Your review for Cauthen</h1>
+        <h1 class="text-center mb-4">Your review for <?php echo htmlspecialchars($_SESSION['dorm_name']); ?></h1>
         <form id="reviewForm" action="submit_review.php" method="post">
-            <input type="hidden" name="location_rating" value="0">
-            <input type="hidden" name="conditions_rating" value="0">
-            <input type="hidden" name="utilities_rating" value="0">
-
             <!-- Location Rating -->
             <div class="form-group mb-4" data-rating-type="location">
                 <label class="star-rating-label">Location</label>
                 <div class="star-rating">
-                    <i class="bi bi-star" data-rating="1"></i>
-                    <i class="bi bi-star" data-rating="2"></i>
-                    <i class="bi bi-star" data-rating="3"></i>
-                    <i class="bi bi-star" data-rating="4"></i>
-                    <i class="bi bi-star" data-rating="5"></i>
+                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                        <i class="bi bi-star<?php echo ($i <= $locationRating) ? '-fill' : ''; ?>" data-rating="<?php echo $i; ?>"></i>
+                    <?php endfor; ?>
                 </div>
+                <input type="hidden" name="location_rating" value="<?php echo $locationRating; ?>">
             </div>
             
             <!-- Conditions Rating -->
             <div class="form-group mb-4" data-rating-type="conditions">
                 <label class="star-rating-label">Conditions</label>
                 <div class="star-rating">
-                    <i class="bi bi-star" data-rating="1"></i>
-                    <i class="bi bi-star" data-rating="2"></i>
-                    <i class="bi bi-star" data-rating="3"></i>
-                    <i class="bi bi-star" data-rating="4"></i>
-                    <i class="bi bi-star" data-rating="5"></i>
+                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                        <i class="bi bi-star<?php echo ($i <= $conditionsRating) ? '-fill' : ''; ?>" data-rating="<?php echo $i; ?>"></i>
+                    <?php endfor; ?>
                 </div>
+                <input type="hidden" name="conditions_rating" value="<?php echo $conditionsRating; ?>">
             </div>
             
             <!-- Utilities Rating -->
             <div class="form-group mb-4" data-rating-type="utilities">
                 <label class="star-rating-label">Utilities</label>
                 <div class="star-rating">
-                    <i class="bi bi-star" data-rating="1"></i>
-                    <i class="bi bi-star" data-rating="2"></i>
-                    <i class="bi bi-star" data-rating="3"></i>
-                    <i class="bi bi-star" data-rating="4"></i>
-                    <i class="bi bi-star" data-rating="5"></i>
+                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                        <i class="bi bi-star<?php echo ($i <= $utilitiesRating) ? '-fill' : ''; ?>" data-rating="<?php echo $i; ?>"></i>
+                    <?php endfor; ?>
                 </div>
+                <input type="hidden" name="utilities_rating" value="<?php echo $utilitiesRating; ?>">
             </div>
             
             <!-- Review Text -->
             <div class="form-group mb-4">
                 <label for="reviewText">Write your review</label>
-                <textarea class="form-control" id="reviewText" name="reviewText" rows="5"></textarea>
+                <textarea class="form-control" id="reviewText" name="reviewText" rows="5"><?php echo $existingReviewText; ?></textarea>
             </div>
             
             <button type="submit" class="btn submit-btn" style="background-color: #e57200">Submit</button>

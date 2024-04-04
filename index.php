@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
             <div class="container-fluid">
-                <a class="navbar-brand nav-text" href="index.html">UVA Dorm Rater</a>
+                <a class="navbar-brand nav-text" href="index.php">UVA Dorm Rater</a>
                 <form class="d-flex" role="search">
                     <?php if(isset($_SESSION['username'])): ?>
                         <span class="btn nav-btn" style="margin-right: 12px; color: #e57200;">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
