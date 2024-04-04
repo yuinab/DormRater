@@ -39,10 +39,12 @@
             learn more about your future or current home for your studies. Start exploring now!
         </p>
 
+        <form action="search.php" method="get">
         <div class="search-bar mt-5 mb-5">
-            <input class="form-control" type="search" placeholder="Search for a dorm" aria-label="Search">
+        <input class="form-control" type="search" name="query" placeholder="Search for a dorm" aria-label="Search">
         </div>
-
+        </form>
+        
         <div id="dormAccordion" class="accordion">
             <h2 class="text-center">
                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#aldermanRoadHallStyle"
@@ -250,3 +252,17 @@
 </body>
 
 </html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector(".search-bar input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); 
+                var query = this.value.trim(); 
+                if (query !== "") {
+                    window.location.href = "search.php?query=" + encodeURIComponent(query); 
+                }
+            }
+        });
+    });
+</script>

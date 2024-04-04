@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <?php session_start(); ?>
+ 
     <header>
         <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
         <div class="container-fluid d-flex justify-content-between align-items-center">

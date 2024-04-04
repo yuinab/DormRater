@@ -1,0 +1,33 @@
+
+h1, h2, h3, h4, h5, h6 {
+    color: #232D4B;
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa; 
+}
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.login-container h2 {
+    color: #232d4b; 
+    margin-bottom: 20px;
+}
+.form-label {
+    color: #232d4b; 
+    font-weight: bold;
+}
+.form-control {
+    border-color: #232d4b; 
+}
+.login-btn {
+    background-color: #e57200; 
+    border-color: #e57200; 
+    color: #fff; 
+}

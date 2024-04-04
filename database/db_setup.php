@@ -31,6 +31,8 @@ pg_query($dbHandle, "CREATE SEQUENCE users_id_seq;");
 pg_query($dbHandle, "CREATE SEQUENCE reviews_id_seq;");
 
 
+
+
 $createUsersTable = "CREATE TABLE users (
     user_id INTEGER PRIMARY KEY DEFAULT nextval('users_id_seq'),
     username VARCHAR(50) UNIQUE NOT NULL,

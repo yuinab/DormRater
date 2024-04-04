@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Drew Hollar">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <header>
-    </header>
-    <main>
-        <p>Sign Up</p>
-        <?php
+<?php
+    
         // Include the database connection file
         require_once '../database/db_connect.php';
 
@@ -59,22 +44,48 @@
                 }
             }
         }
+        
         ?>
 
-        <form action="signup.php" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <button type="submit">Sign Up</button>
-        </form>
-        <p>Already have an account? <a href="../user/login.php">Log in here</a></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Drew Hollar">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="login.css"> <!-- Assuming you want to use the same CSS file for styling -->
+</head>
+<body>
+    <header>
+    </header>
+    <main>
+        <div class="login-container">
+            <h2>Sign Up</h2>
+
+            <form action="signup.php" method="post">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username:</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block login-btn">Sign Up</button>
+                </div>
+            </form>
+            <p class="mt-3 text-center">Already have an account? <a href="../user/login.php">Log in here</a></p>
+        </div>
     </main>
 </body>
-
 </html>

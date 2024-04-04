@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,14 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yuina Barzdukas">
-    <title>Cauthen Reviews</title>
+    <title>Balz-Dobie Reviews</title>
     <link rel="stylesheet" href="dorm_styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   </head>
 
 <body>
-<?php session_start(); ?>
     <header>
         <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
         <div class="container-fluid d-flex justify-content-between align-items-center">
