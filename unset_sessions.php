@@ -1,4 +1,5 @@
 <?php
+// Author: Yuina Barzdukas
 // Function to clear session variables if set
 function clearReviewSession() {
     if(isset($_SESSION['dorm_name'])) {

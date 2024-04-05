@@ -1,4 +1,5 @@
 <?php
+//Author: Yuina Barzdukas
 if (isset($_POST['delete_review']) && isset($_POST['review_id'])) {
     require_once '../database/db_connect.php';
 

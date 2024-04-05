@@ -1,9 +1,8 @@
 <?php
-    
-        // Include the database connection file
+//Author: Drew Hollar
+
         require_once '../database/db_connect.php';
 
-        // Define a function to validate input
         function validateInput($data) {
             $data = trim($data);
             $data = stripslashes($data);
@@ -11,7 +10,7 @@
             return $data;
         }
 
-        // Define a function to check if username already exists
+        // check if username already exists
         function usernameExists($username, $dbHandle) {
             $query = "SELECT * FROM users WHERE username = $1";
             $result = pg_prepare($dbHandle, "check_username", $query);
@@ -19,17 +18,17 @@
             return (pg_num_rows($result) > 0);
         }
 
-        // Process the form when it is submitted
+        // process the form when it is submitted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = validateInput($_POST['username']);
             $email = validateInput($_POST['email']);
             $password = validateInput($_POST['password']);
 
-            // Check if username already exists
+            // username already exists
             if (usernameExists($username, $dbHandle)) {
                 echo "<p>Username already exists. Please choose a different username.</p>";
             } else {
-                // Hash the password
+
                 $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
                 // Insert the new user into the database
@@ -55,7 +54,7 @@
     <meta name="author" content="Drew Hollar">
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="login.css"> <!-- Assuming you want to use the same CSS file for styling -->
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <header>

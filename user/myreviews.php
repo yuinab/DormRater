@@ -1,10 +1,10 @@
 <?php 
+//Authors: Drew Hollar & Yuina Barzdukas
 session_start(); 
 require '../unset_sessions.php';
 clearReviewSession();
 require_once '../database/db_connect.php';
 
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
@@ -15,7 +15,6 @@ $query = "SELECT * FROM reviews WHERE user_id = $1 ORDER BY created_at DESC";
 $result = pg_prepare($dbHandle, "fetch_reviews", $query);
 $result = pg_execute($dbHandle, "fetch_reviews", array($user_id));
 
-// Initialize session variables outside the loop
 $_SESSION['dorm_name'] = '';
 $_SESSION['review_text'] = '';
 $_SESSION['location_rating'] = '';
@@ -42,9 +41,11 @@ $_SESSION['utilities_rating'] = '';
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <a class="navbar-brand nav-text" href="../index.php">UVA Dorm Rater</a>
-                    <div class="search-bar" style="width: 700px;">
-                        <input class="form-control" type="search" placeholder="Search for a dorm" aria-label="Search">
+                    <form action="../search.php" method="get">
+                        <div class="search-bar" style="width: 700px;">
+                        <input class="form-control" type="search" name="query" placeholder="Search for a dorm" aria-label="Search">
                     </div>
+                    </form>
                 </div>
                 <form class="d-flex" role="search">
                     <?php if (isset($_SESSION['username'])) : ?>
@@ -78,7 +79,7 @@ $_SESSION['utilities_rating'] = '';
                 // Buttons for deleting and editing reviews
                 echo "<div class='d-flex align-items-center mb-3'>";
                 echo "<form action='delete_review.php' method='post'>";
-                echo "<input type='hidden' name='review_id' value='{$review['review_id']}'>"; // Assuming 'id' is the primary key of your reviews table
+                echo "<input type='hidden' name='review_id' value='{$review['review_id']}'>";
                 echo "<button type='submit' class='btn' name='delete_review'>";
                 echo "<i class='bi-trash'></i>";
                 echo "</button>";
@@ -104,11 +105,11 @@ $_SESSION['utilities_rating'] = '';
                 // Review text
                 echo "<p class='card-text'>" . htmlspecialchars($review['review_text']) . "</p>";
                 
-                echo "</div>"; // End card-body
-                echo "</div>"; // End card
+                echo "</div>";
+                echo "</div>";
             }
         } else {
-            echo "<div class='card mt-3' style='width: 100%;'>"; // Changed 100rem to 100% to fit the container
+            echo "<div class='card mt-3' style='width: 100%;'>";
             echo "<div class='card-body'>";
             echo "<h4 class='no-reviews'>No Reviews Yet</h4>";
             echo "</div>";

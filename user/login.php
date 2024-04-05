@@ -1,11 +1,12 @@
 <?php
-        session_start(); // Start a new session or resume the existing one
+//Author: Drew Hollar
+        session_start();
 
         // Check if form was submitted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             require_once '../database/db_connect.php';
 
-            // Function to validate user input
+            // validate user input
             function validateInput($data) {
                 $data = trim($data);
                 $data = stripslashes($data);
@@ -16,13 +17,13 @@
             $username = validateInput($_POST['username']);
             $password = validateInput($_POST['password']);
 
-            // SQL query to fetch the user by username
+            // fetch the user by username
             $query = "SELECT * FROM users WHERE username = $1";
             $result = pg_prepare($dbHandle, "fetch_user", $query);
             $result = pg_execute($dbHandle, "fetch_user", array($username));
 
             if ($row = pg_fetch_assoc($result)) {
-                // Verify the password
+
                 if (password_verify($password, $row['password_hash'])) {
                     // Set session variables
                     $_SESSION['user_id'] = $row['user_id'];

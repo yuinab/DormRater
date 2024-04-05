@@ -1,11 +1,12 @@
-<?php session_start(); ?>
+<?php session_start(); 
+require_once 'database/db_setup.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <!--https://cs4640.cs.virginia.edu/ncd6fc/UVADormRater/-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Drew Hollar">
+    <meta name="author" content="Drew Hollar & Yuina Barzdukas">
     <title>UVA Dorm Rater</title>
     <link rel="stylesheet" href="home.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">

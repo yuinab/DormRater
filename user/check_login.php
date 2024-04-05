@@ -1,4 +1,5 @@
 <?php
+//Author Drew Hollar
 session_start();
 
 // Check if the user is logged in

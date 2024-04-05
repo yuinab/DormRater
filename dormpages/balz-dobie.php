@@ -1,9 +1,10 @@
 <?php
+    //Authors: Drew & Yuina
     session_start();
     require '../unset_sessions.php';
     clearReviewSession();
     require_once '../database/db_connect.php';
-    //Change session to Balz-Dobie
+    //change session to Balz-Dobie
     $_SESSION['dorm_name'] = 'Balz-Dobie';
     // calculating averages
     $total_ratings = 0;
@@ -56,9 +57,11 @@
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <a class="navbar-brand nav-text" href="../index.php">UVA Dorm Rater</a>
-                    <div class="search-bar" style="width: 700px;">
-                        <input class="form-control" type="search" placeholder="Search for a dorm" aria-label="Search">
+                    <form action="../search.php" method="get">
+                        <div class="search-bar" style="width: 700px;">
+                        <input class="form-control" type="search" name="query" placeholder="Search for a dorm" aria-label="Search">
                     </div>
+                    </form>
                 </div>
                 <form class="d-flex" role="search">
                     <?php if (isset($_SESSION['username'])) : ?>
@@ -127,7 +130,7 @@ if ($result) {
             echo "<div class='card mt-3' style='max-width: 100%;'>";
             echo "<div class='card-body'>";
             echo "<div class='d-flex align-items-center'>";
-            echo "<h5 class='card-title mb-0'>{$review_date_formatted}</h5>"; // Formatted date
+            echo "<h5 class='card-title mb-0'>{$review_date_formatted}</h5>";
             echo "<span class='ml-auto review-ratings'>";
             echo "<i class='bi-star-fill'></i>";
             echo "<p style='margin-right: 20px; margin-left: 2px;'>" . round(($review['location_rating'] + $review['conditions_rating'] + $review['utilities_rating']) / 3, 2) . "</p>";
@@ -139,13 +142,12 @@ if ($result) {
             echo "<p>{$review['utilities_rating']}</p>";
             echo "</span>";
             echo "</div>";
-            echo "<p class='card-text text-left'>" . htmlspecialchars($review['review_text']) . "</p>"; // Left-align review text
-            // Add buttons for likes and dislikes if you have that functionality
+            echo "<p class='card-text text-left'>" . htmlspecialchars($review['review_text']) . "</p>";
             echo "</div>";
             echo "</div>";
         }
     } else {
-        echo "<div class='card mt-3' style='width: 100%;'>"; // Changed 100rem to 100% to fit the container
+        echo "<div class='card mt-3' style='width: 100%;'>";
         echo "<div class='card-body'>";
         echo "<h4 class='no-reviews'>No Reviews Yet</h4>";
         echo "</div>";

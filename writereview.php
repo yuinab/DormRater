@@ -1,7 +1,8 @@
 <?php
+//Author: Drew Hollar & Yuina Barzdukas
 session_start();
 require_once 'database/db_connect.php'; 
-// Get the review_id from the URL parameters
+
 $review_id = isset($_GET['review_id']) ? $_GET['review_id'] : null;
 
 if ($review_id) {
@@ -46,9 +47,11 @@ else {
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center"> 
                 <a class="navbar-brand nav-text" href="index.php" >UVA Dorm Rater</a>
-                <div class="search-bar" style="width: 700px;">
-                    <input class="form-control" type="search" placeholder="Search for a dorm" aria-label="Search">
-                </div>
+                <form action="search.php" method="get">
+                        <div class="search-bar" style="width: 700px;">
+                        <input class="form-control" type="search" name="query" placeholder="Search for a dorm" aria-label="Search">
+                    </div>
+                    </form>
             </div>
             <form class="d-flex" role="search">
                     <?php if(isset($_SESSION['username'])): ?>

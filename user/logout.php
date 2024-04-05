@@ -1,4 +1,5 @@
 <?php
+//Author: Drew Hollar
 session_start();
 
 $_SESSION = array();

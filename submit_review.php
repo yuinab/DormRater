@@ -1,10 +1,10 @@
 <?php
+//Author: Drew Hollar
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
 
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: user/login.php');
     exit;
@@ -12,7 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'database/db_connect.php';
 
-// Check if form data is sent via POST method and session contains user ID
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $_SESSION['user_id'];
     $dorm_name = $_SESSION['dorm_name'];
