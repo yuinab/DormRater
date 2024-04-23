@@ -115,12 +115,12 @@
                 </div>
             </div>
         </div>
-
+        <div class="reviews-container">
         <div class="col-12">
                 <h2 class="d-inline-block mr-3">Reviews</h2>
                 <a href="../writereview.php" class="btn nav-btn" style="background-color: #e57200">Add your review!</a>
             </div>
-
+        
         <?php
 if ($result) {
     if ($review_count > 0) {
@@ -155,7 +155,34 @@ if ($result) {
     }
 }
 ?>
+    </div>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create a search bar and insert it above the reviews
+            const searchBar = document.createElement('input');
+            searchBar.setAttribute('type', 'text');
+            searchBar.setAttribute('placeholder', 'Search reviews...');
+            searchBar.id = 'reviewSearch';
+            searchBar.classList.add('form-control', 'mb-3'); // Bootstrap classes for styling
+            const reviewsHeader = document.querySelector('.reviews-container h2'); // Assuming h2 is the "Reviews" header
+            reviewsHeader.parentNode.insertBefore(searchBar, reviewsHeader.nextSibling);
+
+            // Function to filter reviews
+            searchBar.addEventListener('input', () => {
+                const searchText = searchBar.value.toLowerCase();
+                const reviews = document.querySelectorAll('.reviews-container .card-body'); // Assuming all reviews are within .card-body elements
+                reviews.forEach(review => {
+                    const text = review.textContent || review.innerText;
+                    if (text.toLowerCase().indexOf(searchText) !== -1) {
+                        review.parentNode.style.display = ''; // Show the review card
+                    } else {
+                        review.parentNode.style.display = 'none'; // Hide the review card
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 

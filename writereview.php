@@ -112,6 +112,7 @@ else {
         </form>
     </main>
 
+    <!-- EXAMPLE OF DOM MANIPULATION -->
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             let stars = document.querySelectorAll('.star-rating .bi');
