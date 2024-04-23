@@ -4,6 +4,7 @@ require_once 'database/db_setup.php';?>
 <html lang="en">
 <head>
     <!--https://cs4640.cs.virginia.edu/ncd6fc/UVADormRater/-->
+    <!--Sprint 3:  https://cs4640.cs.virginia.edu/mhc3cm/DormRater/-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Drew Hollar & Yuina Barzdukas">

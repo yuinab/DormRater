@@ -8,11 +8,22 @@ error_reporting(E_ALL);
 // docker exec -it db bash
 // psql -U localuser example
 // then use SQL commands like SELECT*FROM tablename to see whats going on
+//Credentials for CS Server:
+/*
+$host = "localhost";
+$port = "5432";
+$database = "mhc3cm";
+$user = "mhc3cm";
+$password = "noCCuhAXDBMC";
+*/
+
+// Credentials for local host
 $host = "db";
 $port = "5432";
 $database = "example";
 $user = "localuser";
 $password = "cs4640LocalUser!";
+
 
 $dbHandle = pg_connect("host=$host port=$port dbname=$database user=$user password=$password");
 

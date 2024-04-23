@@ -3,7 +3,16 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Credentials
+// Credentials for CS SERVER
+/*
+$host = "localhost";
+$port = "5432";
+$database = "mhc3cm";
+$user = "mhc3cm";
+$password = "noCCuhAXDBMC";
+*/
+
+// Credentials for local host
 $host = "db";
 $port = "5432";
 $database = "example";
