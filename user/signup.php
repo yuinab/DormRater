@@ -76,7 +76,12 @@
                 
                 <div class="form-group">
                     <label class="form-label" for="password">Password:</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">Show</button>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="form-group">
@@ -86,5 +91,23 @@
             <p class="mt-3 text-center">Already have an account? <a href="../user/login.php">Log in here</a></p>
         </div>
     </main>
+    <!-- arrow fucntion to toggle password-->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            const passwordInput = $('#password');
+            const toggleButton = $('#togglePassword');
+
+            // arrow function to toggle password visibility
+            const togglePasswordVisibility = () => {
+                const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
+                passwordInput.attr('type', type);
+                toggleButton.text(type === 'password' ? 'Show' : 'Hide');
+            };
+
+            // event listener for button click
+            toggleButton.on('click', togglePasswordVisibility);
+        });
+    </script>
 </body>
 </html>
