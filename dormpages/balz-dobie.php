@@ -52,30 +52,31 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
-            <div class="container-fluid d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <a class="navbar-brand nav-text" href="../index.php">UVA Dorm Rater</a>
-                    <form action="../search.php" method="get">
-                        <div class="search-bar" style="width: 700px;">
-                        <input class="form-control" type="search" name="query" placeholder="Search for a dorm" aria-label="Search">
-                    </div>
-                    </form>
-                </div>
-                <form class="d-flex" role="search">
-                    <?php if (isset($_SESSION['username'])) : ?>
-                        <span class="btn nav-btn" style="margin-right: 12px; color: #e57200;">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                        <a href="../user/logout.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Log Out</a>
-                    <?php else : ?>
-                        <a href="../user/login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">Log In</a>
-                        <a href="../user/signup.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Sign Up</a>
-                    <?php endif; ?>
-                    <a href="../user/check_login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">My Reviews</a>
+<header>
+    <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center flex-grow-1">
+                <a class="navbar-brand nav-text" href="../index.php">UVA Dorm Rater</a>
+                <form class="d-flex flex-grow-1" action="../search.php" method="get">
+                    <input type="text" class="form-control mr-2 flex-grow-1" name="query" placeholder="Search for a dorm" aria-label="Search">
                 </form>
             </div>
-        </nav>
-    </header>
+            <form class="d-flex" role="search">
+                <?php if (isset($_SESSION['username'])) : ?>
+                    <span class="btn nav-btn" style="margin-right: 12px; color: #e57200;">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                    <a href="../user/logout.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Log Out</a>
+                <?php else : ?>
+                    <a href="../user/login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">Log In</a>
+                    <a href="../user/signup.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Sign Up</a>
+                <?php endif; ?>
+                <a href="../user/check_login.php" class="btn nav-btn" style="background-color: #e57200;">My Reviews</a>
+            </form>
+        </div>
+    </nav>
+</header>
+
+
+
     <main class="container mt-4 mt-5">
         <h1 class="main-title">
         Balz-Dobie

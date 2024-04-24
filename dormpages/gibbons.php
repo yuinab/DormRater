@@ -4,8 +4,8 @@
     require '../unset_sessions.php';
     clearReviewSession();
     require_once '../database/db_connect.php';
-    //Change session to Cauthen
-    $_SESSION['dorm_name'] = 'Cauthen';
+    //Change session to Gibbons
+    $_SESSION['dorm_name'] = 'Gibbons';
     // calculating averages
     $total_ratings = 0;
     $total_location = 0;
@@ -13,8 +13,8 @@
     $total_utilities = 0;
     $review_count = 0;
 
-    // reviews for Cauthen from the database
-    $dorm_name = 'Cauthen'; // name of the dorm for which to fetch review, change on each site
+    // reviews for Gibbons from the database
+    $dorm_name = 'Gibbons'; // name of the dorm for which to fetch review, change on each site
     $query = "SELECT * FROM reviews WHERE dorm_name = $1 ORDER BY created_at DESC";
     $result = pg_prepare($dbHandle, "fetch_reviews", $query);
     $result = pg_execute($dbHandle, "fetch_reviews", array($dorm_name));
@@ -45,39 +45,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yuina Barzdukas">
-    <title>Cauthen Reviews</title>
+    <title>Gibbons Reviews</title>
     <link rel="stylesheet" href="dorm_styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
-<header>
-    <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center flex-grow-1">
-                <a class="navbar-brand nav-text" href="../index.php">UVA Dorm Rater</a>
-                <form class="d-flex flex-grow-1" action="../search.php" method="get">
-                    <input type="text" class="form-control mr-2 flex-grow-1" name="query" placeholder="Search for a dorm" aria-label="Search">
+    <header>
+        <nav class="navbar bg-body-tertiary nav-text" style="background-color: #232d4b">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <a class="navbar-brand nav-text" href="../index.php">UVA Dorm Rater</a>
+                    <form action="../search.php" method="get">
+                        <div class="search-bar" style="width: 700px;">
+                        <input class="form-control" type="search" name="query" placeholder="Search for a dorm" aria-label="Search">
+                    </div>
+                    </form>
+                </div>
+                <form class="d-flex" role="search">
+                    <?php if (isset($_SESSION['username'])) : ?>
+                        <span class="btn nav-btn" style="margin-right: 12px; color: #e57200;">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                        <a href="../user/logout.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Log Out</a>
+                    <?php else : ?>
+                        <a href="../user/login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">Log In</a>
+                        <a href="../user/signup.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Sign Up</a>
+                    <?php endif; ?>
+                    <a href="../user/check_login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">My Reviews</a>
                 </form>
             </div>
-            <form class="d-flex" role="search">
-                <?php if (isset($_SESSION['username'])) : ?>
-                    <span class="btn nav-btn" style="margin-right: 12px; color: #e57200;">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                    <a href="../user/logout.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Log Out</a>
-                <?php else : ?>
-                    <a href="../user/login.php" class="btn nav-btn" style="background-color: #e57200; margin-right: 12px;">Log In</a>
-                    <a href="../user/signup.php" class="btn nav-btn" style="margin-right: 12px; background-color: #e57200">Sign Up</a>
-                <?php endif; ?>
-                <a href="../user/check_login.php" class="btn nav-btn" style="background-color: #e57200;">My Reviews</a>
-            </form>
-        </div>
-    </nav>
-</header>
-
+        </nav>
+    </header>
     <main class="container mt-4 mt-5">
         <h1 class="main-title">
-        Cauthen
+        Gibbons
         </h1>
 
         <div class="row row-cols-1 row-cols-md-2 g-2 mt-5">
