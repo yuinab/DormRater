@@ -247,24 +247,90 @@ require_once 'database/db_setup.php';?>
 
 
     </main>
-    <!-- Include Bootstrap JS and its dependencies before the closing body tag -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Dynamic behavior that does error messages so client-side input validation also uses AJAX-->
+    <!-- also uses an object-->
+    <!-- also has at least one anonymous function-->
+    <script>
+// defines the Dorm class
+class Dorm {
+    constructor(dormData) {
+        this.id = dormData.dorm_id;
+        this.name = dormData.dorm_name;
+        this.averageRating = dormData.avg_rating;
+    }
+
+    createDormElement() {
+        const dormElement = document.createElement('div');
+        dormElement.className = 'dorm-result';
+        dormElement.innerHTML = `
+            <h3>${this.name}</h3>
+            <p>Average Rating: ${this.averageRating}</p>
+        `;
+        return dormElement;
+    }
+}
+
+//Anonymous function
+document.addEventListener("DOMContentLoaded", function() {
+    const searchForm = document.querySelector("form[action='search.php']");
+    const searchBar = document.querySelector(".search-bar input");
+    const resultsContainer = document.getElementById('dormAccordion');
+
+    searchForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const query = searchBar.value.trim();
+
+        if (query !== "") {
+            fetch('search.php?query=' + encodeURIComponent(query))
+                .then(response => response.json())
+                .then(data => {
+                    resultsContainer.innerHTML = ''; // clear results from earlier
+
+                    if(data.message) {
+                        resultsContainer.innerHTML = `<p>${data.message}</p>`; // if no dorms are found
+                    } else {
+                        const uniqueDorms = new Map(); // this map lets only one rating per unique dorm pop up
+
+                        data.forEach(dormData => {
+                            if(!uniqueDorms.has(dormData.dorm_name)) {
+                                uniqueDorms.set(dormData.dorm_name, true);
+
+                                // use the new dorm OBJECT
+                                const dorm = new Dorm(dormData);
+                                // append the dom element
+                                resultsContainer.appendChild(dorm.createDormElement());
+                            }
+                        });
+                    }
+                })
+                // debugging for when things mess up
+                .catch(error => {
+                    console.error('Error fetching search results:', error);
+                    resultsContainer.innerHTML = `<p>Error fetching search results.</p>`;
+                });
+        } else {
+            if (!document.querySelector('.search-error')) {
+                const errorDiv = document.createElement('div');
+                errorDiv.classList.add('search-error', 'text-danger');
+                errorDiv.textContent = "Please enter a dorm name to search.";
+                searchBar.parentNode.appendChild(errorDiv);
+            }
+        }
+    });
+
+    searchBar.addEventListener("input", function() {
+        const errorDiv = document.querySelector('.search-error');
+        if (errorDiv) {
+            errorDiv.remove();
+        }
+    });
+});
+</script>
+
+
 </body>
 
 </html>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelector(".search-bar input").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault(); 
-                var query = this.value.trim(); 
-                if (query !== "") {
-                    window.location.href = "search.php?query=" + encodeURIComponent(query); 
-                }
-            }
-        });
-    });
-</script>

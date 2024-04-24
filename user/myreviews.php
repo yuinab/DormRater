@@ -29,10 +29,11 @@ $_SESSION['utilities_rating'] = '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yuina Barzdukas">
-    <title>Cauthen Reviews</title>
+    <title>My Reviews</title>
     <link rel="stylesheet" href="../dormpages/dorm_styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -118,6 +119,34 @@ $_SESSION['utilities_rating'] = '';
         ?>
 
     </main>
+    <!-- JQuery script that asks the user if they want to delete before they commit also uses AJAX-->
+    <script>
+    $(document).ready(function() {
+        // jquery event listener
+        $('body').on('click', 'button[name="delete_review"]', function(event) {
+            event.preventDefault();
+            var $this = $(this); // store the jQuery object
+
+            // confirm deletion
+            if (confirm('Are you sure you want to delete this review?')) {
+                var reviewId = $this.prev('input[name="review_id"]').val(); // get review ID from hidden input
+
+                // AJAX request to delete the review
+                $.ajax({
+                    url: 'delete_review.php',
+                    type: 'POST',
+                    data: {review_id: reviewId},
+                    success: function(response) {
+                        $this.closest('.card').remove();
+                    },
+                    error: function() {
+                        alert('Error deleting review. Please try again.');
+                    }
+                });
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

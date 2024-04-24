@@ -157,27 +157,28 @@ if ($result) {
 ?>
     </div>
     </main>
+    <!-- Example of Modifying style and has a event listener -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Create a search bar and insert it above the reviews
             const searchBar = document.createElement('input');
             searchBar.setAttribute('type', 'text');
             searchBar.setAttribute('placeholder', 'Search reviews...');
             searchBar.id = 'reviewSearch';
-            searchBar.classList.add('form-control', 'mb-3'); // Bootstrap classes for styling
-            const reviewsHeader = document.querySelector('.reviews-container h2'); // Assuming h2 is the "Reviews" header
+            searchBar.classList.add('form-control', 'mb-3');
+            const reviewsHeader = document.querySelector('.reviews-container h2');
             reviewsHeader.parentNode.insertBefore(searchBar, reviewsHeader.nextSibling);
 
-            // Function to filter reviews
+            // event listenr to actually filter the reviews
             searchBar.addEventListener('input', () => {
                 const searchText = searchBar.value.toLowerCase();
-                const reviews = document.querySelectorAll('.reviews-container .card-body'); // Assuming all reviews are within .card-body elements
+                //had to add a container here so that the averages were not affected by the search
+                const reviews = document.querySelectorAll('.reviews-container .card-body');
                 reviews.forEach(review => {
                     const text = review.textContent || review.innerText;
                     if (text.toLowerCase().indexOf(searchText) !== -1) {
-                        review.parentNode.style.display = ''; // Show the review card
+                        review.parentNode.style.display = ''; // shows the card
                     } else {
-                        review.parentNode.style.display = 'none'; // Hide the review card
+                        review.parentNode.style.display = 'none'; // hides the card
                     }
                 });
             });
