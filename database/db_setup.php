@@ -13,6 +13,7 @@ $password = "noCCuhAXDBMC";
 */
 
 // Credentials for local host
+
 $host = "db";
 $port = "5432";
 $database = "example";

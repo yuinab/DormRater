@@ -4,8 +4,8 @@
     require '../unset_sessions.php';
     clearReviewSession();
     require_once '../database/db_connect.php';
-    //Change session to Gibbons
-    $_SESSION['dorm_name'] = 'Gibbons';
+    //Change session to Fitzhugh
+    $_SESSION['dorm_name'] = 'Fitzhugh';
     // calculating averages
     $total_ratings = 0;
     $total_location = 0;
@@ -13,8 +13,8 @@
     $total_utilities = 0;
     $review_count = 0;
 
-    // reviews for Gibbons from the database
-    $dorm_name = 'Gibbons'; // name of the dorm for which to fetch review, change on each site
+    // reviews for Fitzhugh from the database
+    $dorm_name = 'Fitzhugh'; // name of the dorm for which to fetch review, change on each site
     $query = "SELECT * FROM reviews WHERE dorm_name = $1 ORDER BY created_at DESC";
     $result = pg_prepare($dbHandle, "fetch_reviews", $query);
     $result = pg_execute($dbHandle, "fetch_reviews", array($dorm_name));
@@ -45,7 +45,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yuina Barzdukas">
-    <title>Gibbons Reviews</title>
+    <title>Fitzhugh Reviews</title>
     <link rel="stylesheet" href="dorm_styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -76,7 +76,7 @@
 </header>
     <main class="container mt-4 mt-5">
         <h1 class="main-title">
-        Gibbons
+        Fitzhugh
         </h1>
 
         <div class="row row-cols-1 row-cols-md-2 g-2 mt-5">

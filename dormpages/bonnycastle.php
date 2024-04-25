@@ -4,8 +4,8 @@
     require '../unset_sessions.php';
     clearReviewSession();
     require_once '../database/db_connect.php';
-    //Change session to Gibbons
-    $_SESSION['dorm_name'] = 'Gibbons';
+    //Change session to Bonnycastle
+    $_SESSION['dorm_name'] = 'Bonnycastle';
     // calculating averages
     $total_ratings = 0;
     $total_location = 0;
@@ -13,8 +13,8 @@
     $total_utilities = 0;
     $review_count = 0;
 
-    // reviews for Gibbons from the database
-    $dorm_name = 'Gibbons'; // name of the dorm for which to fetch review, change on each site
+    // reviews for Bonnycastle from the database
+    $dorm_name = 'Bonnycastle'; // name of the dorm for which to fetch review, change on each site
     $query = "SELECT * FROM reviews WHERE dorm_name = $1 ORDER BY created_at DESC";
     $result = pg_prepare($dbHandle, "fetch_reviews", $query);
     $result = pg_execute($dbHandle, "fetch_reviews", array($dorm_name));

@@ -69,37 +69,37 @@ require_once 'database/db_setup.php';?>
 
                 <div id="aldermanRoadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Gibbons</a>
+                        <a href="dormpages/gibbons.php">Gibbons</a>
                     </div>
                 </div>
                 <div id="aldermanRoadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Kellogg</a>
+                        <a href="dormpages/kellogg.php">Kellogg</a>
                     </div>
                 </div>
                 <div id="aldermanRoadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Lile-Maupin</a>
+                        <a href="dormpages/lile-maupin.php">Lile-Maupin</a>
                     </div>
                 </div>
                 <div id="aldermanRoadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Shannon</a>
+                        <a href="dormpages/shannon.php">Shannon</a>
                     </div>
                 </div>
                 <div id="aldermanRoadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Tuttle-Dunnington</a>
+                        <a href="dormpages/tuttle-dunnington.php">Tuttle-Dunnington</a>
                     </div>
                 </div>
                 <div id="aldermanRoadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Watson-Webb</a>
+                        <a href="dormpages/watson-webb.php">Watson-Webb</a>
                     </div>
                 </div>
                 <div id="aldermanRoadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Woody</a>
+                        <a href="dormpages/woody.php">Woody</a>
                     </div>
                 </div>
             <h2 class="text-center">
@@ -111,19 +111,19 @@ require_once 'database/db_setup.php';?>
 
                 <div id="aldermanRoadSuiteStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Courtenay</a>
+                        <a href="dormpages/courtenay.php">Courtenay</a>
                     </div>
                 </div>
 
                 <div id="aldermanRoadSuiteStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Dunglison</a>
+                        <a href="dormpages/dunglison.php">Dunglison</a>
                     </div>
                 </div>
 
                 <div id="aldermanRoadSuiteStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Fitzhugh</a>
+                        <a href="dormpages/fitzhugh.php">Fitzhugh</a>
                     </div>
                 </div>
 
@@ -136,13 +136,13 @@ require_once 'database/db_setup.php';?>
 
                 <div id="goochdillardSuiteStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Dillard</a>
+                        <a href="dormpages/dillard.php">Dillard</a>
                     </div>
                 </div>
 
                 <div id="goochdillardSuiteStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Gooch</a>
+                        <a href="dormpages/gooch.php">Gooch</a>
                     </div>
                 </div>
 
@@ -154,19 +154,19 @@ require_once 'database/db_setup.php';?>
             </h2>
                 <div id="resedentialColleges" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Brown</a>
+                        <a href="dormpages/brown.php">Brown</a>
                     </div>
                 </div>
 
                 <div id="resedentialColleges" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Hereford</a>
+                        <a href="dormpages/hereford.php">Hereford</a>
                     </div>
                 </div>
 
                 <div id="resedentialColleges" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">International</a>
+                        <a href="dormpages/international.php">International</a>
                     </div>
                 </div>
 
@@ -179,62 +179,62 @@ require_once 'database/db_setup.php';?>
 
                 <div id="mccormickroadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Bonnycastle</a>
+                        <a href="dormpages/bonnycastle.php">Bonnycastle</a>
                     </div>
                 </div>
 
                 <div id="mccormickroadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Dabney</a>
+                        <a href="dormpages/dabney.php">Dabney</a>
                     </div>
                 </div>
 
                 <div id="mccormickroadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Echols</a>
+                        <a href="dormpages/echols.php">Echols</a>
                     </div>
                 </div>
 
                 <div id="mccormickroadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Emmet</a>
+                        <a href="dormpages/emmet.php">Emmet</a>
                     </div>
                 </div>
 
                 <div id="mccormickroadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Hancock</a>
+                        <a href="dormpages/hancock.php">Hancock</a>
                     </div>
                 </div>
 
                 <div id="mccormickroadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Humphreys</a>
+                        <a href="dormpages/humphreys.php">Humphreys</a>
                     </div>
                 </div>
 
                 <div id="mccormickroadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Kent</a>
+                        <a href="dormpages/kent.php">Kent</a>
                     </div>
                 </div>
 
                 <div id="mccormickroadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Metcalf</a>
+                        <a href="dormpages/metcalf.php">Metcalf</a>
                     </div>
                 </div>
 
 
                 <div id="mccormickroadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Lefevre</a>
+                        <a href="dormpages/lefevre.php">Lefevre</a>
                     </div>
                 </div>
 
                 <div id="mccormickroadHallStyle" class="collapse" aria-labelledby="headingOne" data-parent="#dormAccordion">
                     <div class="card-body dorm-card">
-                        <a href="link-to-dorm-review.html">Page</a>
+                        <a href="dormpages/page.php">Page</a>
                     </div>
                 </div>
 
