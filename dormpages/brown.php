@@ -76,7 +76,7 @@
 </header>
     <main class="container mt-4 mt-5">
         <h1 class="main-title">
-        brown
+        Brown
         </h1>
 
         <div class="row row-cols-1 row-cols-md-2 g-2 mt-5">
